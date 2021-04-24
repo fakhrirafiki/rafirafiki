@@ -1,9 +1,13 @@
 import React from 'react';
 import { userLoggedIn, userLoggedOut } from '../../redux/actions/Auth';
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from 'react-router-dom';
 
-function TestPage({ userLoggedIn, userLoggedOut, ...props }) {
+function TestPage({ ...props }) {
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
+    console.log('state', state);
+
 
     console.log('props', props);
 
@@ -14,12 +18,12 @@ function TestPage({ userLoggedIn, userLoggedOut, ...props }) {
 
     const handleLogin = () => {
         console.log('A');
-        userLoggedIn(user);
+        dispatch(userLoggedIn(user));
         console.log('B');
     };
 
     const handleLogout = () => {
-        userLoggedOut();
+        dispatch(userLoggedOut());
     };
     return (
         <div>
@@ -30,8 +34,5 @@ function TestPage({ userLoggedIn, userLoggedOut, ...props }) {
     );
 }
 
-export default
-    withRouter(connect(null, {
-        userLoggedIn, userLoggedOut
-    })(TestPage));
+export default withRouter(TestPage);
 
