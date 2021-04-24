@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+    * {
+        box-sizing:border-box;
+        margin: 0;
+        padding: 0;
+    }
+
     html, body {
         font-family: 'Archivo', sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -11,8 +17,8 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
 
-    * {
-        box-sizing:border-box;
-        margin: 0;
+    a {
+        text-decoration: none;
     }
+
 `;

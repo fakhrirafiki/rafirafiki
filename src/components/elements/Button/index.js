@@ -4,6 +4,8 @@ import { Button } from './styles';
 function ButtonComponent(props) {
     const _fnClick = (e) => {
         if (props.fnClick) props.fnClick(e);
+
+        console.log('Hallo');
     };
     return (
         <Button

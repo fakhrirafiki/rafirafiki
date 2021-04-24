@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container } from './styles';
+import FeedContainer from '../FeedContainer';
 import { StyledCard, Gap, ProfileImage, Name, Description } from '../../styledElements';
 import { profileImg } from '../../../assets';
 
@@ -18,9 +19,7 @@ function MainContent() {
                     Let's get connect further, I have some questions for you about my life.
             </Description>
             </StyledCard>
-            <StyledCard>
-
-            </StyledCard>
+            <FeedContainer />
         </Container>
 
     );
