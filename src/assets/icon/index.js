@@ -14,6 +14,7 @@ import commentIc from './commentIc.png';
 import shareIc from './shareIc.png';
 import pinIc from './pinIc.png';
 import folderIc from './folderIc.png';
+import clockIc from './clock.png';
 
 
 
@@ -34,4 +35,5 @@ export {
     shareIc,
     pinIc,
     folderIc,
+    clockIc,
 };

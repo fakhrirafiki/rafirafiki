@@ -9,6 +9,10 @@ export const Container = styled(StyledCard)`
 
 export const Wrapper = styled.div`
     /* padding: 25px; */
+    position: sticky;
+    z-index:+1;
+    top: 0;
+    background: #fff;
 `;
 
 export const List = styled.ul`
@@ -29,7 +33,7 @@ export const Item = styled.li`
 
 
 export const Image = styled.img`
-height: 14px;
+    height: 14px;
 `;
 
 export const Text = styled.p`

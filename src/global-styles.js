@@ -5,6 +5,7 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing:border-box;
         margin: 0;
         padding: 0;
+        transition: all .2 ease;
     }
 
     html, body {
@@ -13,7 +14,7 @@ export const GlobalStyles = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
         background-color: #F0F2F5;
         /* color: #333333; */
-        font-size: 16px;
+        font-size: 14px;
         margin: 0;
     }
 
