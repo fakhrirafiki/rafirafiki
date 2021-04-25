@@ -68,7 +68,7 @@ export const GrayTextIcon = styled.p`
     align-items: center;
 `;
 
-export const LinkIconWrapper = styled.div`
+export const LinkIconWrapper = styled.span`
     display: flex;
     cursor: pointer;
 `;

@@ -4,6 +4,10 @@ import ProfileCard from '../../components/blocks/ProfileCard';
 import MainContent from '../../components/blocks/MainContent';
 import Header from '../../components/blocks/Header';
 import { Container, ContentContainer } from './styles';
+import TweetsScreen from '../TweetsScreen';
+import BlogScreen from '../BlogScreen';
+import PodcastScreen from '../PodcastScreen';
+import { TWEETS_TEXT, BLOG_TEXT, PODCAST_TEXT } from '../../constants';
 
 const MainApp = () => {
     return (
@@ -11,9 +15,9 @@ const MainApp = () => {
             <Header />
             <ContentContainer>
                 <Switch>
-                    <Route path='/blog/:blogId'>Blog yang ada ID nya</Route>
-                    <Route path='/tweets/:tweetsId'>Tweets yang ada ID nya</Route>
-                    <Route path='/podcast/:podcastId'>Podcast yang ada ID nya</Route>
+                    <Route path={`/${TWEETS_TEXT}/:tweetsId`}><TweetsScreen /></Route>
+                    <Route path={`/${BLOG_TEXT}/:blogId`}><BlogScreen /></Route>
+                    <Route path={`/${PODCAST_TEXT}/:podcastId`}><PodcastScreen /></Route>
                     <Route path='/'><MainContent /></Route>
                 </Switch>
                 <ProfileCard />

@@ -19,6 +19,7 @@ function ButtonComponent(props) {
             center={props.center}
             margin={props.margin}
             padding={props.padding}
+            size={props.size}
         >
             {props.children}
         </Button>

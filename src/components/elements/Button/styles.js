@@ -9,7 +9,7 @@ export const Button = styled.div`
     text-decoration: none;
     border-radius: 4px;
     background-color: ${props => props.secondary ? '#fff' : '#161616'};
-    color: ${props => props.secondary ? '#161616' : '#fff'};
+    color: ${props => props.secondary ? '#000000' : '#fff'};
     border-color: ${props => props.secondary ? '#161616' : '#fff'};
     max-width: ${props => props.width || '100px'} !important;
     height: ${props => props.height || '30px'};
@@ -30,6 +30,13 @@ export const Button = styled.div`
         margin-right: auto;
         margin-left: auto;
     `}
+
+    ${(props) => props.size === 'small' && `
+        font-size: 10px;
+        padding: 0 30px;
+    `}
+
+
 
     &:hover {
         /* background-color: ${props => props.secondary ? '#161616' : '#fff'};

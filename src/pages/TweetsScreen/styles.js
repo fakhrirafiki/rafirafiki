@@ -1,26 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const Container = styled.div`
-    /* padding: 10px; */
-    /* min-height: 100px; */
-`;
-
-export const StyledTweetCard = styled.section`
-    position: relative;
-    /* min-height: 150px; */
-    border-bottom: 1px solid #EBEEF0;
-    padding: 10px;
-    cursor: pointer;
-
-    &:hover{
-        background-color:#dfd7c342;
-    }
-`;
-
-export const PinIcon = styled.img`
-    position: absolute;
-    right: 20px;
-    top: 15px;
+    flex-basis: 600px;
 `;
 
 export const Wrapper = styled.div`
@@ -29,12 +10,13 @@ export const Wrapper = styled.div`
 
 export const ProfileImage = styled.img`
     border-radius: 50%;
-    height: 36px;
-    width: 36px;
-    margin: 10px;
+    height: 64px;
+    width: 64px;
+    margin: 10px 20px 10px 10px;
 `;
 
 export const WrapperContent = styled.div`
+    font-size: 150%;
     margin: 10px;
 `;
 
@@ -82,6 +64,3 @@ export const Icon = styled.img`
     margin-left: ${(props) => `${props.marginLeft}px` || 0};
     cursor: pointer;
 `;
-
-
-

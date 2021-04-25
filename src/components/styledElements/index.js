@@ -1,8 +1,10 @@
 import styled from 'styled-components/macro';
 
 export const StyledCard = styled.section`
-    margin: 10px;
-    padding: 25px;
+    position: relative;
+    max-width: 100%;
+    margin: ${(props) => props.noMargin ? 0 : '10px'} ;
+    padding: ${(props) => props.noPadding ? 0 : '25px'};
     background-color: #fff;
     border-bottom-left-radius: max(0% + 0px, min(0% + 8px, -999900% + 1.53185e+07px)) 8px;
     border-bottom-right-radius: max(0% + 0px, min(0% + 8px, -999900% + 1.53185e+07px)) 8px;
@@ -12,8 +14,8 @@ export const StyledCard = styled.section`
 `;
 
 export const Gap = styled.div`
-      width: ${props => props.width ? props.width : 0};
-      height: ${props => props.height ? props.height : 0};
+      width: ${props => props.width || 10}px;
+      height: ${props => props.height || 10}px;
 `;
 
 export const ProfileImage = styled.img`
@@ -39,4 +41,22 @@ export const Description = styled.p`
     line-height: 18px;
     letter-spacing: 0.04em;
     color: ${props => props.gray ? "rgba(18, 18, 18, 0.40)" : "#121212"};
+`;
+
+export const HoriontalLine = styled.div`
+    width: 100%;
+    position: ${(props) => props.position || 'unset'};
+    border-color: #fff;
+    border-top: 0px;
+    left: 0;
+    height:1px;
+    /* background-color: #EBEEF0; */
+    background-color: #CCCCCC;
+`;
+
+export const ProfileImageRounded = styled.img`
+    border-radius: 50%;
+    height:${(props) => props.height || '36px'} ;
+    width: ${(props) => props.width || '36px'};
+    margin: ${(props) => props.margin || '10px'};
 `;

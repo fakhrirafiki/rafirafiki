@@ -1,6 +1,7 @@
 import React, { } from 'react';
 import { withRouter, useParams } from 'react-router-dom';
 import { Wrapper, List, Item, Image, Text, Link, ActiveLineMark } from './style';
+import { TWEETS_TEXT, BLOG_TEXT, PODCAST_TEXT } from '../../../constants';
 
 import {
     blogIc,
@@ -19,25 +20,25 @@ function FeedContent({ ...props }) {
             <Wrapper>
                 <List>
                     <Item>
-                        <Link to="/tweets">
+                        <Link to={TWEETS_TEXT}>
                             <Image src={tweetIc} alt="" />
-                            <Text active={id !== "blog" && id !== "podcast"}>Tweets</Text>
+                            <Text active={id !== BLOG_TEXT && id !== PODCAST_TEXT}>Tweets</Text>
                         </Link>
-                        <ActiveLineMark active={id !== "blog" && id !== "podcast"} />
+                        <ActiveLineMark active={id !== BLOG_TEXT && id !== PODCAST_TEXT} />
                     </Item>
                     <Item>
-                        <Link to="/blog">
+                        <Link to={BLOG_TEXT}>
                             <Image src={blogIc} alt="" />
-                            <Text active={id === 'blog'}>Blog</Text>
+                            <Text active={id === BLOG_TEXT}>Blog</Text>
                         </Link>
-                        <ActiveLineMark active={id === 'blog'} />
+                        <ActiveLineMark active={id === BLOG_TEXT} />
                     </Item>
                     <Item>
-                        <Link to="/podcast">
+                        <Link to={PODCAST_TEXT}>
                             <Image src={podcastIc} alt="" />
-                            <Text active={id === 'podcast'}>Podcast</Text>
+                            <Text active={id === PODCAST_TEXT}>Podcast</Text>
                         </Link>
-                        <ActiveLineMark active={id === 'podcast'} />
+                        <ActiveLineMark active={id === PODCAST_TEXT} />
                     </Item>
                 </List>
             </Wrapper>

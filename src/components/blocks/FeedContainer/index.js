@@ -6,6 +6,8 @@ import TweetsFeed from './TweetsFeed';
 import BlogFeed from './BlogFeed';
 import PodcastFeed from './PodcastFeed';
 
+import { TWEETS_TEXT, BLOG_TEXT, PODCAST_TEXT } from '../../../constants';
+
 
 function FeedContainer({ location, ...props }) {
     return (
@@ -16,9 +18,9 @@ function FeedContainer({ location, ...props }) {
             </Switch>
 
             <Switch>
-                <Route path='/tweets'><TweetsFeed /></Route>
-                <Route path="/blog"><BlogFeed /></Route>
-                <Route path="/podcast"><PodcastFeed /></Route>
+                <Route path={`/${TWEETS_TEXT}`}><TweetsFeed /></Route>
+                <Route path={`/${BLOG_TEXT}`}><BlogFeed /></Route>
+                <Route path={`/${PODCAST_TEXT}`}><PodcastFeed /></Route>
                 <Route path='/'><TweetsFeed /></Route>
             </Switch>
         </Container>
