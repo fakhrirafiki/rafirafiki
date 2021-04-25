@@ -1,12 +1,19 @@
 import React from 'react';
-import { Container } from './styles';
+import { Link } from 'react-router-dom';
+import { Container, MenuList, MenuItem } from './styles';
 
-function MenuCard() {
+function ProfileCard() {
     return (
         <Container>
-            {/* <h1>Menu Card</h1> */}
+            <MenuList>
+                <Link to="/about"><MenuItem>ABOUT ME</MenuItem></Link>
+                <Link to="/cv"><MenuItem>CV</MenuItem></Link>
+                <Link to="/contact"><MenuItem>CONTACT</MenuItem></Link>
+                <Link to="/work"><MenuItem>WORK</MenuItem></Link>
+            </MenuList>
+
         </Container>
     );
 }
 
-export default MenuCard;
+export default ProfileCard;

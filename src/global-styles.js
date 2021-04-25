@@ -23,9 +23,11 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
 
-    a {
+    a, a:link, a:visited, a:hover, a:active {
         text-decoration: none;
+        color: unset;
     }
+
 
     // Youtube Video Player
     .video-container { 

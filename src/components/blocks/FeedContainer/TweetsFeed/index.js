@@ -5,7 +5,7 @@ import TweetsItem from './TweetsItem';
 function TweetsFeed() {
     return (
         <Container>
-            {Array(40).fill().map(() => (
+            {Array(10).fill().map(() => (
                 <TweetsItem />
             ))}
         </Container>

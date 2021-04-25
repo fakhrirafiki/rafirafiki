@@ -10,4 +10,5 @@ export const ContentContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: start;
+    flex-wrap: wrap;
 `;

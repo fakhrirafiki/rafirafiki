@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ProfileCard from '../../components/blocks/ProfileCard';
+import MenuCard from '../../components/blocks/MenuCard';
+import Sidebar from '../../components/blocks/Sidebar';
 import MainContent from '../../components/blocks/MainContent';
 import Header from '../../components/blocks/Header';
 import { Container, ContentContainer } from './styles';
@@ -20,7 +22,11 @@ const MainApp = () => {
                     <Route path={`/${PODCAST_TEXT}/:podcastId`}><PodcastScreen /></Route>
                     <Route path='/'><MainContent /></Route>
                 </Switch>
-                <ProfileCard />
+                <Sidebar>
+                    <MenuCard />
+                    <ProfileCard />
+
+                </Sidebar>
             </ContentContainer>
         </Container>
     );
