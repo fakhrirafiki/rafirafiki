@@ -1,12 +1,9 @@
 /* eslint-disable */
 import React, {useEffect, useState} from 'react'
-import tfidf, {Corpus} from 'tiny-tfidf-node'
+import {Corpus} from 'tiny-tfidf-node'
 // Config variables
 
 import {fetchSpreadsheet, fetchstemming} from './googleApi'
-
-// import state from '../../assets/json/dataExample.json'
-// import speech from '../../assets/json/speeches.json'
 
 // eslint-disable-next-line no-extend-native
 Array.prototype.sortBy = function (p) {
@@ -35,9 +32,30 @@ function TFID() {
         .filter((item) => +item.Stopword === 1)
         .map((item) => item.Imbuhan)
 
+      const textToReplace = response2
+        .map((item) => ({
+          originTerm: item.Imbuhan,
+          replaceTerm: item['Kata Dasar'],
+        }))
+        .filter((item) => item.originTerm !== item.replaceTerm)
+
+      console.log('textToReplace', textToReplace)
+
+      const replacedDocumentsArrRaw = documentsArrRaw.map((item) => {
+        let str = item
+
+        textToReplace.forEach((item) => {
+          str = replaceAll(str, item.originTerm, item.replaceTerm)
+        })
+        console.log(str)
+        return str
+      })
+
+      console.log(replacedDocumentsArrRaw)
+
       const corpusObj = await new Corpus(
         identifiersArr,
-        documentsArrRaw,
+        replacedDocumentsArrRaw,
         false,
         stopwordsArr,
         2,
@@ -59,7 +77,7 @@ function TFID() {
       idf: corpus?.getCollectionFrequencyWeight(item),
     }))
     setDocuments(documentsArr)
-    setAllTerms(alltermsArr)
+    // setAllTerms(alltermsArr)
 
     let tfArrSetting = []
     documentsArr.forEach((value, key) => {
@@ -70,21 +88,26 @@ function TFID() {
     tfArrSetting.map((item, index) => {
       item.forEach((value, key) => {
         const obj = {
-          name: key,
-          qty: value,
+          term: key,
+          tf: value,
+          df: corpus?.getCollectionFrequency(key),
+          idf: corpus?.getCollectionFrequencyWeight(key),
+          idfMei: Math.log10(
+            +documents.size / +corpus?.getCollectionFrequency(key),
+          ),
         }
 
-        const existingObj = tfArrSetting2.find((item) => item.name === obj.name)
+        const existingObj = tfArrSetting2.find((item) => item.term === obj.term)
 
         if (existingObj) {
           const newArr = tfArrSetting2.filter(
-            (item) => item.name !== existingObj.name,
+            (item) => item.term !== existingObj.term,
           )
           newArr.push({
-            name: key,
-            qty: obj.qty + existingObj.qty,
+            ...obj,
+            term: key,
+            tf: obj.tf + existingObj.tf,
           })
-
           tfArrSetting2 = [...newArr]
         }
 
@@ -94,7 +117,11 @@ function TFID() {
       })
     })
 
-    console.log(tfArrSetting2)
+    const filteredArray = tfArrSetting2.filter((item) => item.idf > 0)
+
+    setAllTerms(filteredArray)
+
+    // console.log(filteredArray.sortBy('tf'))
   }, [corpus])
 
   // data palsu
@@ -154,21 +181,34 @@ function TFID() {
           <tr>
             <th>No</th>
             <th>Term</th>
+            <th>Tf</th>
+            <th>D</th>
             <th>df</th>
+            {/* <th>IDF System</th> */}
             <th>IDF</th>
+            <th>Weight</th>
           </tr>
         </thead>
         <tbody>
-          {allTerms.sortBy('frequency').map((item, index) => (
+          {allTerms.sortBy('idfMei').map((item, index) => (
             <tr key={item.term}>
               <td>{index + 1}</td>
               <td>{item.term}</td>
-              <td>{item.frequency}</td>
-              <td>{item.idf}</td>
+              <td>{item.tf}</td>
+              <td>{documents.size}</td>
+              <td>{item.df}</td>
+              {/* <td>{item.idf}</td> */}
+              <td>{item.idfMei}</td>
+              <td>{item.idfMei + 1}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div>
+        {corpus.getTerms().map((item) => (
+          <p>{item}</p>
+        ))}
+      </div>
     </div>
   )
 }
