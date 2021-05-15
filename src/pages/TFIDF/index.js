@@ -22,28 +22,20 @@ function replaceAll(str, find, replace) {
 
 function TFID() {
   const [corpus, setCorpus] = useState('')
-  const [identifiers, setIdentifiers] = useState('')
   const [documents, setDocuments] = useState('')
-  const [stemmingWord, setStemmingWord] = useState('')
-  const [stopWords, setStopWords] = useState('')
+  const [allTerms, setAllTerms] = useState('')
 
   useEffect(() => {
     async function fecth() {
       const response = await fetchSpreadsheet()
       const identifiersArr = response.map((item) => item.nama)
       const documentsArrRaw = response.map((item) => item.hasil_observasi)
-
-      setIdentifiers(identifiersArr)
-      setDocuments(documentsArrRaw)
-
       const response2 = await fetchstemming()
-      console.log(response2)
       const stopwordsArr = response2
         .filter((item) => +item.Stopword === 1)
         .map((item) => item.Imbuhan)
 
-      setStopWords(stopwordsArr)
-      const corpusObj = new Corpus(
+      const corpusObj = await new Corpus(
         identifiersArr,
         documentsArrRaw,
         false,
@@ -51,10 +43,59 @@ function TFID() {
         2,
         0.75,
       )
+
       setCorpus(corpusObj)
     }
     fecth()
   }, [])
+
+  useEffect(() => {
+    if (!corpus) return
+    const documentsArr = corpus?._documents
+    const alltermsArr = corpus?.getTerms().map((item) => ({
+      tf: 0,
+      term: item,
+      frequency: corpus?.getCollectionFrequency(item),
+      idf: corpus?.getCollectionFrequencyWeight(item),
+    }))
+    setDocuments(documentsArr)
+    setAllTerms(alltermsArr)
+
+    let tfArrSetting = []
+    documentsArr.forEach((value, key) => {
+      tfArrSetting.push(value._termFrequencies)
+    })
+
+    let tfArrSetting2 = []
+    tfArrSetting.map((item, index) => {
+      item.forEach((value, key) => {
+        const obj = {
+          name: key,
+          qty: value,
+        }
+
+        const existingObj = tfArrSetting2.find((item) => item.name === obj.name)
+
+        if (existingObj) {
+          const newArr = tfArrSetting2.filter(
+            (item) => item.name !== existingObj.name,
+          )
+          newArr.push({
+            name: key,
+            qty: obj.qty + existingObj.qty,
+          })
+
+          tfArrSetting2 = [...newArr]
+        }
+
+        if (!existingObj) {
+          tfArrSetting2.push(obj)
+        }
+      })
+    })
+
+    console.log(tfArrSetting2)
+  }, [corpus])
 
   // data palsu
   // const identifier = state.map((item) => item.state)
@@ -65,7 +106,9 @@ function TFID() {
   // const similarity = new tfidf.Similarity(corpus)
 
   // CORPUS
-  console.log(corpus)
+  // console.log('corpus', corpus)
+  // console.log('documents', documents)
+  // console.log('allTerms', allTerms)
   // console.log(corpus._collectionFrequencies)
   // console.log(corpus.getTerms())
   // console.log(console.log(corpus?.getCollectionFrequency('kopi')))
@@ -101,7 +144,7 @@ function TFID() {
   // }))
   // console.log('collectionFrequencies', collectionFrequencies)
 
-  if (!corpus) return <div>Loading</div>
+  if (!corpus || !allTerms) return <div>Loading</div>
 
   return (
     <div>
@@ -116,22 +159,14 @@ function TFID() {
           </tr>
         </thead>
         <tbody>
-          {corpus
-            ?.getTerms()
-            .map((item) => ({
-              term: item,
-              frequency: corpus?.getCollectionFrequency(item),
-              idf: corpus.getCollectionFrequencyWeight(item),
-            }))
-            .sortBy('frequency')
-            .map((item, index) => (
-              <tr>
-                <td>{index + 1}</td>
-                <td>{item.term}</td>
-                <td>{item.frequency}</td>
-                <td>{item.idf}</td>
-              </tr>
-            ))}
+          {allTerms.sortBy('frequency').map((item, index) => (
+            <tr key={item.term}>
+              <td>{index + 1}</td>
+              <td>{item.term}</td>
+              <td>{item.frequency}</td>
+              <td>{item.idf}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
