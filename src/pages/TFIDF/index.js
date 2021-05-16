@@ -23,6 +23,7 @@ function TFID() {
   const [allTerms, setAllTerms] = useState('')
 
   useEffect(() => {
+    if (allTerms.length > 0) return
     async function fecth() {
       const response = await fetchSpreadsheet()
       const identifiersArr = response.map((item) => item.nama)
@@ -39,21 +40,16 @@ function TFID() {
         }))
         .filter((item) => item.originTerm !== item.replaceTerm)
 
-      console.log('textToReplace', textToReplace)
-
       const replacedDocumentsArrRaw = documentsArrRaw.map((item) => {
         let str = item
 
         textToReplace.forEach((item) => {
           str = replaceAll(str, item.originTerm, item.replaceTerm)
         })
-        console.log(str)
         return str
       })
 
-      console.log(replacedDocumentsArrRaw)
-
-      const corpusObj = await new Corpus(
+      const corpusObj = new Corpus(
         identifiersArr,
         replacedDocumentsArrRaw,
         false,
@@ -65,28 +61,27 @@ function TFID() {
       setCorpus(corpusObj)
     }
     fecth()
-  }, [])
+  }, [allTerms])
 
   useEffect(() => {
     if (!corpus) return
     const documentsArr = corpus?._documents
-    const alltermsArr = corpus?.getTerms().map((item) => ({
-      tf: 0,
-      term: item,
-      frequency: corpus?.getCollectionFrequency(item),
-      idf: corpus?.getCollectionFrequencyWeight(item),
-    }))
+    // const alltermsArr = corpus?.getTerms().map((item) => ({
+    //   tf: 0,
+    //   term: item,
+    //   frequency: corpus?.getCollectionFrequency(item),
+    //   idf: corpus?.getCollectionFrequencyWeight(item),
+    // }))
     setDocuments(documentsArr)
-    // setAllTerms(alltermsArr)
 
     let tfArrSetting = []
-    documentsArr.forEach((value, key) => {
-      tfArrSetting.push(value._termFrequencies)
+    documentsArr?.forEach((value, key) => {
+      tfArrSetting?.push(value._termFrequencies)
     })
 
     let tfArrSetting2 = []
-    tfArrSetting.map((item, index) => {
-      item.forEach((value, key) => {
+    tfArrSetting?.map((item, index) => {
+      item?.forEach((value, key) => {
         const obj = {
           term: key,
           tf: value,
@@ -120,8 +115,6 @@ function TFID() {
     const filteredArray = tfArrSetting2.filter((item) => item.idf > 0)
 
     setAllTerms(filteredArray)
-
-    // console.log(filteredArray.sortBy('tf'))
   }, [corpus])
 
   // data palsu
@@ -171,7 +164,10 @@ function TFID() {
   // }))
   // console.log('collectionFrequencies', collectionFrequencies)
 
-  if (!corpus || !allTerms) return <div>Loading</div>
+  console.log('object')
+
+  if (!corpus) return <div>Loading</div>
+  if (!allTerms) return <div>Loading</div>
 
   return (
     <div>
@@ -206,7 +202,7 @@ function TFID() {
       </table>
       <div>
         {corpus.getTerms().map((item) => (
-          <p>{item}</p>
+          <p key={item}>{item}</p>
         ))}
       </div>
     </div>
