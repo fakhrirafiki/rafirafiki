@@ -153,6 +153,11 @@ function TFID() {
             ...obj,
             term: getKanseiTermById(key),
             tf: obj.tf + existingObj.tf,
+            weight:
+              (obj.tf + existingObj.tf) *
+              Math.log10(
+                +documents.size / +corpus?.getCollectionFrequency(key),
+              ),
           })
           tfArrSetting2 = [...newArr]
         }
@@ -167,8 +172,6 @@ function TFID() {
 
     setAllTerms(filteredArray)
   }, [corpus, kanseiWords])
-
-  console.log('allTerms', allTerms)
 
   if (!corpus) return <div>Loading</div>
   if (!allTerms) return <div>Loading</div>
@@ -206,7 +209,7 @@ function TFID() {
           ))}
         </tbody>
       </table>
-      <div>
+      <div style={{display: 'none'}}>
         {corpus.getTerms().map((item) => (
           <p key={item}>{item}</p>
         ))}
