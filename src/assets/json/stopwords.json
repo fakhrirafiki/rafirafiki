@@ -1,0 +1,807 @@
+[
+    {
+        "Imbuhan": "ada",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "adanya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "agar",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "aja",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "akan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "aku",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "amah",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "anak",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "apa",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "apakah",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "apalagi",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "atau",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "bagi",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "bagian",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "baik",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "beberapa",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "bentuk",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "bentuknya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "beralaskan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "berantakan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "berharap",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "berkaitan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "berlebihan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "biar",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "biji",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "bisa",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "boleh",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "buka",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "bukan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "bulet",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "contoh",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "contohnya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "cukup",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "customer",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "custumer",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dalam",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dapat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dari",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "daripada",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dasar",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dekat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dengan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dewasa",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "di",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dibagian",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dibandingkan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dibawah",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dibuang",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "diganti",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dihilangkan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dikasih",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dikurangin",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "dilengkapi",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "hanya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "harapan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "harusnya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "inginnya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "jangan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "jika",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "jualan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "juga",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kafe",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kalangan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kalau",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kalo",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "karena",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kaum",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kaya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kayanya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "ke",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kesan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kita",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "kurang",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "lain",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "lalu",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "lama",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "maka",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "masi",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "masih",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "masuk",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "mau",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "maunya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "membingungngkan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "membuat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "memerlukan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "memilih",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "mempunya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "mempunyai",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "menahan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "menajdi",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "menggunakan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "menggunankan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "mengurangi",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "menunjukkan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "menutupi",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "menyukai",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "ml",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "mungkin",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "namun",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "nya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "odajie",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "oleh",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "orangnya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "pada",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "pakai",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "pasti",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "pengennya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "perempuan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "perlu",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "perpaduan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "pilih",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "saat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "saja",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sangat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "saya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sebaiknya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sebelumnya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sedikit",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sekali",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sekalian",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sekarang",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "semua",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "seperti",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sepertii",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "serius",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sesaui",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sesuai",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "sudah",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "suka",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "tambahan",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "tapi",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "tapir",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "target",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "telur",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "tempat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "tentang",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "tentu",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "terbuat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "terdapat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "terlalu",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "terlihat",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "tertarik",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "tidak",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "toko",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "ulang",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "umum",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "umumnya",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "unsur",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "untuk",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "usah",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "warna",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "yaitu",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "yang",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "yg",
+        "Kata Dasar": "",
+        "Stopword": 1
+    },
+    {
+        "Imbuhan": "Get Behind Me Satan",
+        "Kata Dasar": 2005,
+        "Stopword": 3
+    },
+    {
+        "Imbuhan": "Icky Thump",
+        "Kata Dasar": 2007,
+        "Stopword": 2
+    },
+    {
+        "Imbuhan": "Under Great White Northern Lights",
+        "Kata Dasar": 2010,
+        "Stopword": 11
+    },
+    {
+        "Imbuhan": "Live in Mississippi",
+        "Kata Dasar": 2011,
+        "Stopword": "-"
+    },
+    {
+        "Imbuhan": "Live at the Gold Dollar",
+        "Kata Dasar": 2012,
+        "Stopword": "-"
+    },
+    {
+        "Imbuhan": "Nine Miles from the White City",
+        "Kata Dasar": 2013,
+        "Stopword": "-"
+    }
+]
