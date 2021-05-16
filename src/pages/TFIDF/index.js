@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, {useEffect, useState} from 'react'
 import {Corpus} from 'tiny-tfidf-node'
+import converter from 'number-to-words'
 // Config variables
 
 import {fetchSpreadsheet, fetchstemming} from './googleApi'
@@ -21,6 +22,14 @@ function TFID() {
   const [corpus, setCorpus] = useState('')
   const [documents, setDocuments] = useState('')
   const [allTerms, setAllTerms] = useState('')
+  const [kanseiWords, setKanseiWords] = useState('')
+
+  function getKanseiTermById(id) {
+    if (!kanseiWords) return
+    const obj = kanseiWords.find((item) => item.id === id)
+    if (!obj) return 'xxx'
+    return obj.term
+  }
 
   useEffect(() => {
     if (allTerms.length > 0) return
@@ -28,30 +37,74 @@ function TFID() {
       const response = await fetchSpreadsheet()
       const identifiersArr = response.map((item) => item.nama)
       const documentsArrRaw = response.map((item) => item.hasil_observasi)
-      const response2 = await fetchstemming()
-      const stopwordsArr = response2
-        .filter((item) => +item.Stopword === 1)
-        .map((item) => item.Imbuhan)
 
-      const textToReplace = response2
-        .map((item) => ({
-          originTerm: item.Imbuhan,
-          replaceTerm: item['Kata Dasar'],
-        }))
-        .filter((item) => item.originTerm !== item.replaceTerm)
+      const kanseiWordsArr = getKanseiWords()
+      function getKanseiWords() {
+        const arr1 = documentsArrRaw.map((item) => item.split(', '))
+        let arr2 = []
+
+        arr1.forEach((item) => {
+          item.forEach((word) => {
+            const obj = {
+              id: converter
+                .toWordsOrdinal(arr2.length)
+                .split('-')
+                .join()
+                .replace(/,/g, ''),
+              term: word,
+            }
+
+            const isObjExist =
+              arr2.filter((item) => item.term === word).length > 0
+            if (!isObjExist) return arr2.push(obj)
+          })
+        })
+
+        return arr2
+      }
+
+      console.log('kanseiWords', kanseiWordsArr)
+      setKanseiWords(kanseiWordsArr)
+      const response2 = await fetchstemming()
+      const stopwordsArr = getStopwordsArr()
+      function getStopwordsArr() {
+        return response2
+          .filter((item) => +item.Stopword === 1)
+          .map((item) => item.Imbuhan)
+      }
+      const textToReplace = getTextToReplace()
+      function getTextToReplace() {
+        return response2
+          .map((item) => ({
+            originTerm: item.Imbuhan,
+            replaceTerm: item['Kata Dasar'],
+          }))
+          .filter((item) => item.originTerm !== item.replaceTerm)
+      }
 
       const replacedDocumentsArrRaw = documentsArrRaw.map((item) => {
         let str = item
-
         textToReplace.forEach((item) => {
           str = replaceAll(str, item.originTerm, item.replaceTerm)
         })
         return str
       })
 
+      const replacedDocumentsArrRaw2 = documentsArrRaw.map((item) => {
+        let str = item
+
+        kanseiWordsArr.forEach((item) => {
+          str = replaceAll(str, item.term, item.id)
+        })
+
+        return str
+      })
+
+      console.log('replacedDocumentsArrRaw2', replacedDocumentsArrRaw2)
+
       const corpusObj = new Corpus(
         identifiersArr,
-        replacedDocumentsArrRaw,
+        replacedDocumentsArrRaw2,
         false,
         stopwordsArr,
         2,
@@ -66,12 +119,6 @@ function TFID() {
   useEffect(() => {
     if (!corpus) return
     const documentsArr = corpus?._documents
-    // const alltermsArr = corpus?.getTerms().map((item) => ({
-    //   tf: 0,
-    //   term: item,
-    //   frequency: corpus?.getCollectionFrequency(item),
-    //   idf: corpus?.getCollectionFrequencyWeight(item),
-    // }))
     setDocuments(documentsArr)
 
     let tfArrSetting = []
@@ -80,10 +127,10 @@ function TFID() {
     })
 
     let tfArrSetting2 = []
-    tfArrSetting?.map((item, index) => {
+    tfArrSetting?.map((item) => {
       item?.forEach((value, key) => {
         const obj = {
-          term: key,
+          term: getKanseiTermById(key),
           tf: value,
           df: corpus?.getCollectionFrequency(key),
           idf: corpus?.getCollectionFrequencyWeight(key),
@@ -94,6 +141,7 @@ function TFID() {
             value *
             Math.log10(+documents.size / +corpus?.getCollectionFrequency(key)),
         }
+        // console.log('obj', obj)
 
         const existingObj = tfArrSetting2.find((item) => item.term === obj.term)
 
@@ -103,7 +151,7 @@ function TFID() {
           )
           newArr.push({
             ...obj,
-            term: key,
+            term: getKanseiTermById(key),
             tf: obj.tf + existingObj.tf,
           })
           tfArrSetting2 = [...newArr]
@@ -118,56 +166,9 @@ function TFID() {
     const filteredArray = tfArrSetting2.filter((item) => item.idf > 0)
 
     setAllTerms(filteredArray)
-  }, [corpus])
+  }, [corpus, kanseiWords])
 
-  // data palsu
-  // const identifier = state.map((item) => item.state)
-  // const hasil_observasi = speech
-
-  // let corpus
-  // const document = new tfidf.Document(hasil_observasi[0])
-  // const similarity = new tfidf.Similarity(corpus)
-
-  // CORPUS
-  // console.log('corpus', corpus)
-  // console.log('documents', documents)
-  // console.log('allTerms', allTerms)
-  // console.log(corpus._collectionFrequencies)
-  // console.log(corpus.getTerms())
-  // console.log(console.log(corpus?.getCollectionFrequency('kopi')))
-  //   console.log(corpus.getDocument('California'))
-  // console.log(corpus.getDocumentIdentifiers())
-  //   console.log(corpus.getCommonTerms('Jeje', 'Fadil'))
-  // console.log(corpus.getCollectionFrequencyWeight('codajie'))
-  //   console.log(corpus.getDocumentVector('Jeje'))
-  //   console.log(corpus.getTopTermsForDocument('Jeje'))
-  //   console.log(corpus.getResultsForQuery('codajie'))
-  // console.log(corpus.getStopwords())
-
-  // DOKUMENT
-  //   console.log(document)
-  //   console.log(document.getTermFrequency('pas'))
-  //   console.log(document.getText())
-  //   console.log(document.getLength())
-  //   console.log(document.getUniqueTerms())
-
-  // SIMILARITY
-  //   console.log(similarity)
-  //   console.log(similarity.getDistanceMatrix())
-
-  // const dataArrays = corpus.getTerms().map((item) => ({
-  //   item: item,
-  // }))
-
-  // const allTerm = corpus?.getTerms()
-  // console.log('allTerm', allTerm)
-  // const collectionFrequencies = allTerm?.map((item) => ({
-  //   term: item,
-  //   frequency: corpus?.getCollectionFrequency(item),
-  // }))
-  // console.log('collectionFrequencies', collectionFrequencies)
-
-  console.log('object')
+  console.log('allTerms', allTerms)
 
   if (!corpus) return <div>Loading</div>
   if (!allTerms) return <div>Loading</div>
