@@ -178,7 +178,7 @@ function TFID() {
 
   return (
     <div>
-      TF IDF
+      <p>TF IDF MEI</p>
       <table>
         <thead>
           <tr>
@@ -214,6 +214,40 @@ function TFID() {
           <p key={item}>{item}</p>
         ))}
       </div>
+      <br />
+      <br />
+      <br />
+      <p>TF IDF Kerry Rodden</p>
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Term</th>
+            <th>Tf</th>
+            <th>D</th>
+            <th>df</th>
+            {/* <th>IDF System</th> */}
+            <th>IDF</th>
+            <th>Weight</th>
+            <th>Weight By Kerry Rodden</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allTerms.sortBy('idf').map((item, index) => (
+            <tr key={item.term}>
+              <td>{index + 1}</td>
+              <td>{item.term}</td>
+              <td>{item.tf}</td>
+              <td>{documents.size}</td>
+              <td>{item.df}</td>
+              {/* <td>{item.idf}</td> */}
+              <td>{item.idfMei}</td>
+              <td>{item.weight}</td>
+              <td>{item.idf}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
