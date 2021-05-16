@@ -90,6 +90,9 @@ function TFID() {
           idfMei: Math.log10(
             +documents.size / +corpus?.getCollectionFrequency(key),
           ),
+          weight:
+            value *
+            Math.log10(+documents.size / +corpus?.getCollectionFrequency(key)),
         }
 
         const existingObj = tfArrSetting2.find((item) => item.term === obj.term)
@@ -183,10 +186,11 @@ function TFID() {
             {/* <th>IDF System</th> */}
             <th>IDF</th>
             <th>Weight</th>
+            <th>Weight By Kerry Rodden</th>
           </tr>
         </thead>
         <tbody>
-          {allTerms.sortBy('idfMei').map((item, index) => (
+          {allTerms.sortBy('weight').map((item, index) => (
             <tr key={item.term}>
               <td>{index + 1}</td>
               <td>{item.term}</td>
@@ -195,7 +199,8 @@ function TFID() {
               <td>{item.df}</td>
               {/* <td>{item.idf}</td> */}
               <td>{item.idfMei}</td>
-              <td>{item.idfMei + 1}</td>
+              <td>{item.weight}</td>
+              <td>{item.idf}</td>
             </tr>
           ))}
         </tbody>
