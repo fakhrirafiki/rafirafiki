@@ -52,7 +52,7 @@ function TFID() {
                 .join()
                 .replace(/,/g, ''),
               term: word,
-            }
+            } 
 
             const isObjExist =
               arr2.filter((item) => item.term === word).length > 0
