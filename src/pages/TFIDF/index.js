@@ -1,10 +1,9 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { Corpus } from "tiny-tfidf-node";
-import converter from "number-to-words";
 // Config variables
 
-import { fetchSpreadsheet, fetchstemming } from "./googleApi";
+import doc, { fetchMetaData, fetchstemming } from "./googleApi";
 
 // eslint-disable-next-line no-extend-native
 Array.prototype.sortBy = function (p) {
@@ -18,7 +17,7 @@ function replaceAll(str, find, replace) {
   return str.replace(new RegExp(escapedFind, "g"), replace);
 }
 
-function TFID() {
+export default function TFID() {
   const [corpus, setCorpus] = useState("");
   const [documents, setDocuments] = useState("");
   const [allTerms, setAllTerms] = useState("");
@@ -26,7 +25,7 @@ function TFID() {
   useEffect(() => {
     if (allTerms.length > 0) return;
     async function fecth() {
-      const response = await fetchSpreadsheet();
+      const response = await fetchMetaData();
       const identifiersArr = response.map((item) => item.nama);
       const documentsArrRaw = response.map((item) => item.hasil_observasi);
       const response2 = await fetchstemming();
@@ -86,12 +85,12 @@ function TFID() {
           tf: value,
           df: corpus?.getCollectionFrequency(key),
           idf: corpus?.getCollectionFrequencyWeight(key),
-          idfMei: Math.log10(
+          weight: Math.log10(
             +documents.size / +corpus?.getCollectionFrequency(key),
           ),
-          weight:
-            value *
-            Math.log10(+documents.size / +corpus?.getCollectionFrequency(key)),
+          // weight:
+          //   value *
+          //   Math.log10(+documents.size / +corpus?.getCollectionFrequency(key)),
         };
 
         const existingObj = tfArrSetting2.find(
@@ -126,8 +125,62 @@ function TFID() {
     setAllTerms(filteredArray);
   }, [corpus]);
 
+  async function handleAddResultToSpreadSheet() {
+    const resultSheet = await doc.sheetsById[1642808700];
+    await resultSheet.clear();
+    await resultSheet.setHeaderRow([
+      "NO",
+      ...Object.keys(allTerms[0]).map((item) => item.toUpperCase()),
+    ]);
+
+    const arrayOfRowValues = allTerms.map((item, index) => [
+      index + 1,
+      item.term,
+      item.tf,
+      item.df,
+      item.idf,
+      item.weight,
+    ]);
+
+    await resultSheet.addRows(arrayOfRowValues, { insert: true });
+
+    console.log("allTerms", allTerms);
+  }
+
   if (!corpus) return <div>Loading</div>;
   if (!allTerms) return <div>Loading</div>;
+
+  // CORPUS
+  // console.log(corpus);
+  console.log("all term", corpus.getTerms());
+  //   console.log(corpus.getCollectionFrequency('hurricane'))
+  //   console.log(corpus.getDocument('California'))
+  //   console.log(corpus.getDocumentIdentifiers())
+  //   console.log(corpus.getResultsForQuery('hurricane'))
+  //   console.log(corpus.getCommonTerms('Jeje', 'Fadil'))
+  //   console.log(corpus.getCollectionFrequencyWeight('codajie'))
+  //   console.log(corpus.getDocumentVector('Jeje'))
+  //   console.log(corpus.getTopTermsForDocument('Jeje'))
+  //   console.log(corpus.getResultsForQuery('codajie'))
+  console.log("stop words", corpus.getStopwords());
+
+  // DOKUMENT
+  //   console.log(document)
+  //   console.log(document.getTermFrequency('pas'))
+  //   console.log(document.getText())
+  //   console.log(document.getLength())
+  //   console.log(document.getUniqueTerms())
+
+  // SIMILARITY
+  //   console.log(similarity)
+  //   console.log(similarity.getDistanceMatrix())
+
+  // const dataArrays = corpus.getTerms().map((item) => ({
+  //   item: item,
+  // }))
+
+  // const csvFromArrayOfArrays = convertArrayToCSV(dataArrays)
+  // console.log(csvFromArrayOfArrays)
 
   return (
     <div>
@@ -140,10 +193,8 @@ function TFID() {
             <th>Tf</th>
             <th>D</th>
             <th>df</th>
-            {/* <th>IDF System</th> */}
             <th>IDF</th>
             <th>Weight</th>
-            <th>Weight By Kerry Rodden</th>
           </tr>
         </thead>
         <tbody>
@@ -154,55 +205,22 @@ function TFID() {
               <td>{item.tf}</td>
               <td>{documents.size}</td>
               <td>{item.df}</td>
-              {/* <td>{item.idf}</td> */}
-              <td>{item.idfMei}</td>
-              <td>{item.weight}</td>
               <td>{item.idf}</td>
+              <td>{item.weight}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div style={{ display: "none" }}>
-        {corpus.getTerms().map((item) => (
-          <p key={item}>{item}</p>
-        ))}
-      </div>
-      <br />
-      <br />
-      <br />
-      <p>TF IDF Kerry Rodden</p>
-      <table>
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Term</th>
-            <th>Tf</th>
-            <th>D</th>
-            <th>df</th>
-            {/* <th>IDF System</th> */}
-            <th>IDF</th>
-            <th>Weight</th>
-            <th>Weight By Kerry Rodden</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allTerms.sortBy("idf").map((item, index) => (
-            <tr key={item.term}>
-              <td>{index + 1}</td>
-              <td>{item.term}</td>
-              <td>{item.tf}</td>
-              <td>{documents.size}</td>
-              <td>{item.df}</td>
-              {/* <td>{item.idf}</td> */}
-              <td>{item.idfMei}</td>
-              <td>{item.weight}</td>
-              <td>{item.idf}</td>
-            </tr>
+
+      <button onClick={handleAddResultToSpreadSheet}>Add to spreadsheet</button>
+
+      {false && (
+        <div>
+          {corpus.getTerms().map((item) => (
+            <p key={item}>{item}</p>
           ))}
-        </tbody>
-      </table>
+        </div>
+      )}
     </div>
   );
 }
-
-export default TFID;
