@@ -72,6 +72,8 @@ export default function TFID() {
     const documentsArr = corpus?._documents;
     setDocuments(documentsArr);
 
+    console.log("documentsArr", documentsArr);
+
     let tfArrSetting = [];
     documentsArr?.forEach((value, key) => {
       tfArrSetting?.push(value._termFrequencies);
@@ -83,6 +85,7 @@ export default function TFID() {
         const obj = {
           term: key,
           tf: value,
+          d: documentsArr.size,
           df: corpus?.getCollectionFrequency(key),
           idf: corpus?.getCollectionFrequencyWeight(key),
           weight: Math.log10(
@@ -137,6 +140,7 @@ export default function TFID() {
       index + 1,
       item.term,
       item.tf,
+      item.d,
       item.df,
       item.idf,
       item.weight,
