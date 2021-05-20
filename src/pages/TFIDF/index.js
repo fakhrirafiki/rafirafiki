@@ -1,136 +1,88 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react'
-import {Corpus} from 'tiny-tfidf-node'
-import converter from 'number-to-words'
+import React, { useEffect, useState } from "react";
+import { Corpus } from "tiny-tfidf-node";
+import converter from "number-to-words";
 // Config variables
 
-import {fetchSpreadsheet, fetchstemming} from './googleApi'
+import { fetchSpreadsheet, fetchstemming } from "./googleApi";
 
 // eslint-disable-next-line no-extend-native
 Array.prototype.sortBy = function (p) {
   return this.slice(0).sort(function (a, b) {
-    return a[p] < b[p] ? 1 : a[p] > b[p] ? -1 : 0
-  })
-}
+    return a[p] < b[p] ? 1 : a[p] > b[p] ? -1 : 0;
+  });
+};
 
 function replaceAll(str, find, replace) {
-  var escapedFind = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1')
-  return str.replace(new RegExp(escapedFind, 'g'), replace)
+  var escapedFind = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  return str.replace(new RegExp(escapedFind, "g"), replace);
 }
 
 function TFID() {
-  const [corpus, setCorpus] = useState('')
-  const [documents, setDocuments] = useState('')
-  const [allTerms, setAllTerms] = useState('')
-  const [kanseiWords, setKanseiWords] = useState('')
-
-  function getKanseiTermById(id) {
-    if (!kanseiWords) return
-    const obj = kanseiWords.find((item) => item.id === id)
-    if (!obj) return 'xxx'
-    return obj.term
-  }
+  const [corpus, setCorpus] = useState("");
+  const [documents, setDocuments] = useState("");
+  const [allTerms, setAllTerms] = useState("");
 
   useEffect(() => {
-    if (allTerms.length > 0) return
+    if (allTerms.length > 0) return;
     async function fecth() {
-      const response = await fetchSpreadsheet()
-      const identifiersArr = response.map((item) => item.nama)
-      const documentsArrRaw = response.map((item) => item.hasil_observasi)
-
-      const kanseiWordsArr = getKanseiWords()
-      function getKanseiWords() {
-        const arr1 = documentsArrRaw.map((item) => item.split(', '))
-        let arr2 = []
-
-        arr1.forEach((item) => {
-          item.forEach((word) => {
-            const obj = {
-              id: converter
-                .toWordsOrdinal(arr2.length)
-                .split('-')
-                .join()
-                .replace(/,/g, ''),
-              term: word,
-            } 
-
-            const isObjExist =
-              arr2.filter((item) => item.term === word).length > 0
-            if (!isObjExist) return arr2.push(obj)
-          })
-        })
-
-        return arr2
-      }
-
-      console.log('kanseiWords', kanseiWordsArr)
-      setKanseiWords(kanseiWordsArr)
-      const response2 = await fetchstemming()
-      const stopwordsArr = getStopwordsArr()
+      const response = await fetchSpreadsheet();
+      const identifiersArr = response.map((item) => item.nama);
+      const documentsArrRaw = response.map((item) => item.hasil_observasi);
+      const response2 = await fetchstemming();
+      const stopwordsArr = getStopwordsArr();
       function getStopwordsArr() {
         return response2
           .filter((item) => +item.Stopword === 1)
-          .map((item) => item.Imbuhan)
+          .map((item) => item.Imbuhan);
       }
-      const textToReplace = getTextToReplace()
+      const textToReplace = getTextToReplace();
       function getTextToReplace() {
         return response2
           .map((item) => ({
             originTerm: item.Imbuhan,
-            replaceTerm: item['Kata Dasar'],
+            replaceTerm: item["Kata Dasar"],
           }))
-          .filter((item) => item.originTerm !== item.replaceTerm)
+          .filter((item) => item.originTerm !== item.replaceTerm);
       }
 
       const replacedDocumentsArrRaw = documentsArrRaw.map((item) => {
-        let str = item
+        let str = item;
         textToReplace.forEach((item) => {
-          str = replaceAll(str, item.originTerm, item.replaceTerm)
-        })
-        return str
-      })
-
-      const replacedDocumentsArrRaw2 = documentsArrRaw.map((item) => {
-        let str = item
-
-        kanseiWordsArr.forEach((item) => {
-          str = replaceAll(str, item.term, item.id)
-        })
-
-        return str
-      })
-
-      console.log('replacedDocumentsArrRaw2', replacedDocumentsArrRaw2)
+          str = replaceAll(str, item.originTerm, item.replaceTerm);
+        });
+        return str;
+      });
 
       const corpusObj = new Corpus(
         identifiersArr,
-        replacedDocumentsArrRaw2,
+        replacedDocumentsArrRaw,
         false,
         stopwordsArr,
         2,
         0.75,
-      )
+      );
 
-      setCorpus(corpusObj)
+      setCorpus(corpusObj);
     }
-    fecth()
-  }, [allTerms])
+    fecth();
+  }, [allTerms]);
 
   useEffect(() => {
-    if (!corpus) return
-    const documentsArr = corpus?._documents
-    setDocuments(documentsArr)
+    if (!corpus) return;
+    const documentsArr = corpus?._documents;
+    setDocuments(documentsArr);
 
-    let tfArrSetting = []
+    let tfArrSetting = [];
     documentsArr?.forEach((value, key) => {
-      tfArrSetting?.push(value._termFrequencies)
-    })
+      tfArrSetting?.push(value._termFrequencies);
+    });
 
-    let tfArrSetting2 = []
+    let tfArrSetting2 = [];
     tfArrSetting?.map((item) => {
       item?.forEach((value, key) => {
         const obj = {
-          term: getKanseiTermById(key),
+          term: key,
           tf: value,
           df: corpus?.getCollectionFrequency(key),
           idf: corpus?.getCollectionFrequencyWeight(key),
@@ -140,41 +92,42 @@ function TFID() {
           weight:
             value *
             Math.log10(+documents.size / +corpus?.getCollectionFrequency(key)),
-        }
-        // console.log('obj', obj)
+        };
 
-        const existingObj = tfArrSetting2.find((item) => item.term === obj.term)
+        const existingObj = tfArrSetting2.find(
+          (item) => item.term === obj.term,
+        );
 
         if (existingObj) {
           const newArr = tfArrSetting2.filter(
             (item) => item.term !== existingObj.term,
-          )
+          );
           newArr.push({
             ...obj,
-            term: getKanseiTermById(key),
+            term: key,
             tf: obj.tf + existingObj.tf,
             weight:
               (obj.tf + existingObj.tf) *
               Math.log10(
                 +documents.size / +corpus?.getCollectionFrequency(key),
               ),
-          })
-          tfArrSetting2 = [...newArr]
+          });
+          tfArrSetting2 = [...newArr];
         }
 
         if (!existingObj) {
-          tfArrSetting2.push(obj)
+          tfArrSetting2.push(obj);
         }
-      })
-    })
+      });
+    });
 
-    const filteredArray = tfArrSetting2.filter((item) => item.idf > 0)
+    const filteredArray = tfArrSetting2.filter((item) => item.idf > 0);
 
-    setAllTerms(filteredArray)
-  }, [corpus, kanseiWords])
+    setAllTerms(filteredArray);
+  }, [corpus]);
 
-  if (!corpus) return <div>Loading</div>
-  if (!allTerms) return <div>Loading</div>
+  if (!corpus) return <div>Loading</div>;
+  if (!allTerms) return <div>Loading</div>;
 
   return (
     <div>
@@ -194,7 +147,7 @@ function TFID() {
           </tr>
         </thead>
         <tbody>
-          {allTerms.sortBy('weight').map((item, index) => (
+          {allTerms.sortBy("weight").map((item, index) => (
             <tr key={item.term}>
               <td>{index + 1}</td>
               <td>{item.term}</td>
@@ -209,7 +162,7 @@ function TFID() {
           ))}
         </tbody>
       </table>
-      <div style={{display: 'none'}}>
+      <div style={{ display: "none" }}>
         {corpus.getTerms().map((item) => (
           <p key={item}>{item}</p>
         ))}
@@ -233,7 +186,7 @@ function TFID() {
           </tr>
         </thead>
         <tbody>
-          {allTerms.sortBy('idf').map((item, index) => (
+          {allTerms.sortBy("idf").map((item, index) => (
             <tr key={item.term}>
               <td>{index + 1}</td>
               <td>{item.term}</td>
@@ -249,7 +202,7 @@ function TFID() {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export default TFID
+export default TFID;
